@@ -1,9 +1,24 @@
-function App() {
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Header from '../Header';
+import Home from '../Home';
+
+const theme = createTheme();
+
+const App = () => {
+
   return (
-    
-    <h1>Garden App</h1>
-  
+    <ThemeProvider theme={theme}>
+      <div style={{ padding: theme.spacing(2) }}>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />            
+          </Routes>
+        </Router>
+      </div>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
