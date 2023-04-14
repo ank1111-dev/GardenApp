@@ -10,6 +10,9 @@ const Header = () => {
           <ListItemButton component={Link} to="/">
             Home
           </ListItemButton>
+          <ListItemButton component={Link} to="/suggestions">
+            Gardening Suggestions
+          </ListItemButton>
         </List>
       </nav>
     </header>
