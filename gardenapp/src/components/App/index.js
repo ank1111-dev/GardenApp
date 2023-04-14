@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../Header';
 import Home from '../Home';
 import Location from '../LocationSelection'
+import WeatherDetails from '../WeatherDetails'
 
 const theme = createTheme();
 
@@ -15,7 +16,11 @@ const App = () => {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />  
-            <Route path="/suggestions" element={<Location />} />          
+            <Route path="/suggestions" element={<Location />} />   
+            <Route
+              path="/weather-details"
+              element={<WeatherDetails location={new URLSearchParams(window.location.search).get('location')} />}
+            />       
           </Routes>
         </Router>
       </div>
