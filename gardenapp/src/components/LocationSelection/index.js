@@ -8,7 +8,7 @@ const Location = () => {
 
   const handleLocationSubmit = async (e) => {
     e.preventDefault();
-    navigate(`/weather-details?location=${location}`);
+    navigate(`/weather-details/${location}`);
   };
 
   const handleLocationChange = (e) => {

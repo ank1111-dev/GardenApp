@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react'
+import { useParams } from 'react-router-dom';
 import { CircularProgress, Typography } from '@mui/material'
 import PlantSuggestions from '../PlantSuggestions'
 import {data} from '../PlantData'
 
-const WeatherDetails = ({ location }) => {
+const WeatherDetails = () => {
+  const { location } = useParams();
   const [weatherData, setWeatherData] = useState(null)
   const [suggestedPlants, setSuggestedPlants] = useState([])
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY

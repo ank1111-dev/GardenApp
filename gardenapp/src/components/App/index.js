@@ -18,8 +18,8 @@ const App = () => {
             <Route path="/" element={<Home />} />  
             <Route path="/suggestions" element={<Location />} />   
             <Route
-              path="/weather-details"
-              element={<WeatherDetails location={new URLSearchParams(window.location.search).get('location')} />}
+              path="/weather-details/:location"
+              element={<WeatherDetails />}
             />       
           </Routes>
         </Router>
