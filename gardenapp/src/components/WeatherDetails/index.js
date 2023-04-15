@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { CircularProgress } from '@mui/material'
+import { CircularProgress, Typography } from '@mui/material'
+import PlantSuggestions from '../PlantSuggestions'
 import {data} from '../PlantData'
 
 const WeatherDetails = ({ location }) => {
@@ -75,26 +76,13 @@ const WeatherDetails = ({ location }) => {
       <p>Temperature: {temperature}°C</p>
       <p>Weather: {weatherDescription}</p>
       {suggestedPlants.length > 0 ? (
-        <div>
-          <h2>Suggested Plants for {getClimateZone(Math.round(weatherData.main.temp - 273.15))} Climate Zone</h2>
-          <ul>
-            {suggestedPlants.map(plant => (
-              <li key={plant.id}>
-                <h3>{plant.name}</h3>
-                <p>{plant.description}</p>
-                <p><strong>Ideal Growing Conditions: </strong>{plant.ideal_growing_conditions}</p>
-                <p><strong>Care: </strong>{plant.care}</p>
-                <p><strong>Best Time to Plant: </strong>{plant.best_time_to_plant}</p>
-                <p><strong>Pests and Diseases: </strong>{plant.pests_and_diseases}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+        <PlantSuggestions climateZone={getClimateZone(temperature)} />
+      ) : (
+        <Typography variant="h4">No suggested plants for this climate zone.</Typography>
+      )}
     </>
   );
-};      
-    
+}  
 
 export default WeatherDetails;
 
