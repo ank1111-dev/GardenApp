@@ -29,18 +29,21 @@ const WeatherBox = styled('div')({
   alignItems: 'center',
   justifyItems: 'center',
   padding: '20px',
-  backgroundColor: '#fff',
   borderRadius: '10px',
   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+  backgroundColor: '#ecebbd'
 });
 
 const WeatherIcon = styled('img')({
   marginTop: '10px',
-  animation: `spin 2s linear infinite`,
-  '@keyframes spin': {
-    from: { transform: 'rotate(0deg)' },
-    to: { transform: 'rotate(360deg)' },
-}});
+  animation: `pulse 1s ease-in-out infinite`,
+  '@keyframes pulse': {
+    '0%': { transform: 'scale(1)' },
+    '50%': { transform: 'scale(1.2)' },
+    '100%': { transform: 'scale(1)' },
+  },
+});
+
 
 
 const WeatherDetailsContainer = styled('div')({
@@ -48,8 +51,8 @@ const WeatherDetailsContainer = styled('div')({
 });
 
 const Weather = styled('div')({
-    display: 'flex',
-    alignItems: 'center',
+    display: 'inline-flex',
+  alignItems: 'center',
 })
 
 
@@ -67,7 +70,7 @@ const WeatherDetails = () => {
   const [error, setError] = useState("");
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY
 
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location},AU&appid=${apiKey}`
   
 
   const fetchWeatherData = useCallback(() => {
@@ -157,7 +160,7 @@ const WeatherDetails = () => {
     {!weatherData && <CircularProgress />}
     {weatherData && (
     <>
-    <Title>{weatherData.name}</Title>
+    <Title>Weather You Like It or Not, You're Here: {weatherData.name}</Title>
     <DateTypography>{date}, {dayOfWeek}</DateTypography>    
     <WeatherBox>
     <WeatherDetailsContainer>
@@ -166,8 +169,8 @@ const WeatherDetails = () => {
     <Typography variant="h6">Description: {weatherDescription} <span></span></Typography>
     <WeatherIcon src={weatherIconUrl} alt="Weather Icon" />
     </Weather>
-    <Typography variant="h6">Humidity: {weatherData.main.humidity}%</Typography>
-    <Typography variant="h6">Wind Speed: {weatherData.wind.speed} m/s</Typography>
+    <Typography variant="h6" >Humidity: {weatherData.main.humidity}%</Typography>
+    <Typography variant="h6" sx={{lineHeight:'3'}}>Wind Speed: {weatherData.wind.speed} m/s</Typography>
     </WeatherDetailsContainer>
     </WeatherBox>
     {suggestedPlants.length > 0 ? (
