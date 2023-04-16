@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Box, List, ListItem  } from '@mui/material';
-import headerImage from './image/header.jpg';
+import headerImage from './image/header.png';
 
 const Header = () => {
   return (
