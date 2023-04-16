@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'react-router-dom';
-import { CircularProgress, Typography, styled } from '@mui/material'
+import { CircularProgress, Typography, styled , Box} from '@mui/material'
 import PlantSuggestions from '../PlantSuggestions'
 import {data} from '../PlantData'
 
@@ -42,6 +42,7 @@ const WeatherIcon = styled('img')({
     to: { transform: 'rotate(360deg)' },
 }});
 
+
 const WeatherDetailsContainer = styled('div')({
   margin: '20px 0',
 });
@@ -63,6 +64,7 @@ const WeatherDetails = () => {
   const { location } = useParams();
   const [weatherData, setWeatherData] = useState(null)
   const [suggestedPlants, setSuggestedPlants] = useState([])
+  const [error, setError] = useState("");
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY
 
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`
@@ -72,16 +74,18 @@ const WeatherDetails = () => {
     fetch(apiUrl)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Unable to fetch weather data');
+          throw new Error('Invalid location entered!');
         }
         return response.json();
       })
       .then(data => {
         setWeatherData(data);
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error(error);
+        setError(error.message);
+      });
   }, [apiUrl]);
-  
 
   useEffect(() => {
     if (location) {
@@ -118,19 +122,34 @@ const WeatherDetails = () => {
     }
   }, [weatherData]);
 
+  if (error) {
+    return (
+      <Box border={1} 
+      p={2} 
+      borderRadius={4} 
+      borderColor="red" 
+      bgcolor="rgba(255, 0, 0, 0.1)" 
+      m={2} 
+      mt={4}>
+        <Typography variant="h5" align="center" color="error">
+          {error}
+        </Typography>
+      </Box>
+    );
+  }  
 
   if (!weatherData) {
-    return <CircularProgress />;
+    return <CircularProgress />
   }
 
   console.log(weatherData); 
-  const weatherIconUrl = `https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
+  const weatherIconUrl = `https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`
 
-  const temperature = Math.round(weatherData.main.temp - 273.15);
-  const weatherDescription = weatherData.weather[0].description; 
-  const currentDate = new Date();
-  const dayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
-  const date = currentDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const temperature = Math.round(weatherData.main.temp - 273.15)
+  const weatherDescription = weatherData.weather[0].description
+  const currentDate = new Date()
+  const dayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'long' })
+  const date = currentDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
   
 
   return (
@@ -163,6 +182,8 @@ const WeatherDetails = () => {
     </Container>
     )
     }
+
+
 export default WeatherDetails;
 
 
