@@ -25,7 +25,8 @@ const Header = () => {
               GardeningSuggestions
               <span style={{ position: 'absolute', top: 0, left: 1, height: '100%', borderLeft: '2px dotted #b6986d'}}></span>
             </ListItem>  
-            <ListItem  sx={{   position: 'relative',}}>
+            <ListItem component={Link} to="/gardening-wizard" sx={{ '&:hover': { color: '#78c677' },  position: 'relative',}}>
+              GardeningWizard
                 <span style={{ position: 'absolute', top: 0, left: 1, height: '100%', borderLeft: '2px dotted #b6986d'}}></span>
             </ListItem>          
           </List>
