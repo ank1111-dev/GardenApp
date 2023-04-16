@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion"
 
 const PlantCard = ({ plant, onClick, isSelected }) => {
   return (
-    <Card onClick={onClick} sx={{ mb: 2, bgcolor: isSelected ? 'primary.main' : 'transparent', borderRadius: 4, boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)', color: isSelected ? 'common' : 'initial' , backgroundColor: "#dcd0ff"}}>
+    <Card onClick={onClick} sx={{ mb: 2, bgcolor: isSelected ? 'primary.main' : 'transparent', borderRadius: 4, boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)', color: isSelected ? 'common' : 'initial' , backgroundColor: "#ecebbd"}}>
       <CardContent>
         <Typography variant="h6" textAlign="center" sx={{ fontWeight: 'bold', color: "#8a2be2" }}>{plant.name}</Typography>
         {isSelected && (
