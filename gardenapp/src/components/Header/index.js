@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Box, List, ListItem  } from '@mui/material';
-import headerImage from './image/header.png';
+// import headerImage from './image/header.png';
 import { Outlet } from 'react-router-dom';
 
 const Header = () => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: '#ffffff', flexDirection: 'column', fontFamily: 'Arial, Verdana, Sans-serif'   }}>
       <Box sx={{ flex: '1 1 auto',  width: '100%'}}>
-        <img src={headerImage} alt="" style={{ width: '100%', height: '300px' }}/>
+        <img src= '../image/header.png' alt="" style={{ width: '100%', height: '300px' }}/>
       </Box>
       <Box sx={{ flex: '2 1 auto', textAlign: 'center' }}>
       <h1 style={{ margin: 0, fontWeight: 'bold' , fontSize: '40px'}}>

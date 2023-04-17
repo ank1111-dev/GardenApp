@@ -5,7 +5,7 @@ import Home from '../Home';
 import Location from '../LocationSelection'
 import WeatherDetails from '../WeatherDetails'
 import GardeningWizard from '../GardeningWizard';
-import PlantFinder from '../PlantFinder';
+import PlantIdentification from '../PlantFinder';
 import Articles from '../Articles';
 import PageNotFound from '../PageNotFound';
 
@@ -29,7 +29,7 @@ const App = () => {
               element={<WeatherDetails />}
             />     
             <Route path="/gardening-wizard" element={<GardeningWizard />} />
-            <Route path="/gardening-wizard/plant-finder" element={<PlantFinder />} />
+            <Route path="/gardening-wizard/plant-finder" element={<PlantIdentification />} />
             <Route path="/gardening-wizard/articles" element={<Articles />} />                             
           </Routes>
         </Router>
