@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Box, List, ListItem  } from '@mui/material';
 import headerImage from './image/header.png';
+import { Outlet } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -31,12 +32,14 @@ const Header = () => {
             </ListItem>          
           </List>
         </nav>
+        <Outlet />
       </Box>
     </Box>
   );
 };
 
 export default Header;
+
 
 
 
