@@ -7,6 +7,7 @@ import WeatherDetails from '../WeatherDetails'
 import GardeningWizard from '../GardeningWizard';
 import PlantFinder from '../PlantFinder';
 import Articles from '../Articles';
+import PageNotFound from '../PageNotFound';
 
 
 
@@ -19,8 +20,9 @@ const App = () => {
       <div style={{ padding: theme.spacing(2) }}>
         <Router>
           <Header />
-          <Routes>
+          <Routes>           
             <Route path="/" element={<Home />} />  
+            <Route path="*" element={<PageNotFound />} />
             <Route path="/suggestions" element={<Location />} />   
             <Route
               path="/weather-details/:location"
@@ -28,8 +30,7 @@ const App = () => {
             />     
             <Route path="/gardening-wizard" element={<GardeningWizard />} />
             <Route path="/gardening-wizard/plant-finder" element={<PlantFinder />} />
-            <Route path="/gardening-wizard/articles" element={<Articles />} />         
-                        
+            <Route path="/gardening-wizard/articles" element={<Articles />} />                             
           </Routes>
         </Router>
       </div>
