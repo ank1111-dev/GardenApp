@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader } from '@mui/material';
 
 const GardeningWizard = () => {
   return (
-    <div  style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' , backgroundColor:"#f0f0f0", height: '100vh'}}>
+    <div  style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' , backgroundColor:"#f0f0f0", height: '50vh'}}>
       <Card style={{ margin: '100px 0',  height: '20vh' , textAlign: 'center', }}>
         <CardHeader style={{ color: '#4CAF50'}} title="Plant Finder" />
         <CardContent>
