@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Input, Typography } from '@mui/material';
+import {Box, Button, Input, Typography } from '@mui/material';
 
 const PlantIdentification = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -27,7 +27,7 @@ const PlantIdentification = () => {
 
     Promise.all(base64files).then((base64files) => {
       const data = {
-        api_key: process.env.REACT_APP_PLANT_API_KEY,
+        api_key: "",
         images: base64files,
         modifiers: ['crops_fast', 'similar_images'],
         plant_language: 'en',
@@ -65,55 +65,58 @@ const PlantIdentification = () => {
     });
   }, [selectedFiles]);
 
-  return (
-    <form>
-      <Input type="file" inputProps={{ multiple: true }} onChange={handleFileSelect} />
-      <Button variant="contained" onClick={() => setSelectedFiles([])}>
-        Submit
-      </Button>
-
-      {results && (
-        <div>
-          <Typography variant="h6">Results:</Typography>
-          <table>
-            <tbody>
-              <tr>
-                <td>Plant Name:</td>
-                <td>{results.suggestions[0].plant_name}</td>
-              </tr>
-              <tr>
-                <td>Common Names:</td>
-                <td>{results.suggestions[0].plant_details.common_names.join(', ')}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
-            <Typography variant="h6">Plant Description:</Typography>
-            <Typography variant="body1">
-              {results.suggestions[0].plant_details.wiki_description.value}
-            </Typography>
-          </div>
-          <div>
-            <Typography variant="h6">Image:</Typography>
-            <img src={results.images[0].url} alt="Plant" />
-          </div>
-          <div>
-            <Typography variant="h6">Similar Images:</Typography>
-            {results.suggestions[0].similar_images.map((img) => (
-              <img key={img.id} src={img.url} alt="Similar Plant" />
-            ))}
-          </div>
-        </div>
-      )}
-
-
-      {error && (
-        <div>
-          <Typography variant="h6">Error:</Typography>
-          <Typography variant="body1">{error}</Typography>
-        </div>
-      )}
-    </form>
+ return (
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ border: '1px solid grey', padding: '1rem' }}>
+        <form>
+          <Input type="file" inputProps={{ multiple: true }} onChange={handleFileSelect} />
+          <Button variant="contained" onClick={() => setSelectedFiles([])}>
+            Submit
+          </Button>
+  
+          {results && (
+            <div>
+              <Typography variant="h6">Results:</Typography>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Plant Name:</td>
+                    <td>{results.suggestions[0].plant_name}</td>
+                  </tr>
+                  <tr>
+                    <td>Common Names:</td>
+                    <td>{results.suggestions[0].plant_details.common_names ? results.suggestions[0].plant_details.common_names.join(', ') : "Not Available"}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div>
+                <Typography variant="h6">Plant Description:</Typography>
+                <Typography variant="body1">
+                  {results.suggestions[0].plant_details.wiki_description.value}
+                </Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Image:</Typography>
+                <img src={results.images[0].url} alt="Plant" />
+              </div>
+              <div>
+                <Typography variant="h6">Similar Images:</Typography>
+                {results.suggestions[0].similar_images.map((img) => (
+                  <img key={img.id} src={img.url} alt="Similar Plant" />
+                ))}
+              </div>
+            </div>
+          )}
+  
+          {error && (
+            <div>
+              <Typography variant="h6">Error:</Typography>
+              <Typography variant="body1">{error}</Typography>
+            </div>
+          )}
+        </form>
+      </Box>
+    </Box>
   );
 };
 
