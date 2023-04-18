@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {Box, Button, Input, Typography } from '@mui/material';
+import {Card, CardContent, Box,  ButtonBase, Input, Typography } from '@mui/material';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const PlantIdentification = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -66,17 +67,35 @@ const PlantIdentification = () => {
   }, [selectedFiles]);
 
  return (
-    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{ border: '1px solid grey', padding: '1rem' }}>
-        <form>
-          <Input type="file" inputProps={{ multiple: true }} onChange={handleFileSelect} />
-          <Button variant="contained" onClick={() => setSelectedFiles([])}>
-            Submit
-          </Button>
+    <Box sx={{ display: 'flex', justifyContent: 'center' , alignItems: 'center' }}>
+      <Box sx={{  padding: '1rem' , borderRadius: 2   }}>
+        <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '70px', backgroundColor: '#f8f8f8', borderRadius: '10px' }}>
+        <h2 style={{ marginBottom: '50px', color: '#b6986d', textAlign: 'center' }}>Identify plants. For free.</h2>
+        <label htmlFor="file-input" hidden>
+          Upload Image
+        </label>
+        <Input
+          id="file-input"
+          type="file"
+          inputProps={{ multiple: true }}
+          onChange={handleFileSelect}
+          sx={{ display: 'none' }}
+        />
+        <ButtonBase
+          component="label"
+          htmlFor="file-input"
+          variant="contained"
+          color="secondary"
+          sx={{   padding: 1, backgroundColor: '#4CAF50', color: '#fff' }}
+        >
+          <CloudUploadIcon sx={{ mr: '0.5rem' }} />
+          Upload Image
+        </ButtonBase>
   
-          {results && (
-            <div>
-              <Typography variant="h6">Results:</Typography>
+        {results && (
+          <Card sx={{ marginTop: '2rem' }}>
+            <CardContent>
+              <Typography variant="h6" sx={{color: '#4CAF50'}}>Results:</Typography>
               <table>
                 <tbody>
                   <tr>
@@ -90,36 +109,36 @@ const PlantIdentification = () => {
                 </tbody>
               </table>
               <div>
-                <Typography variant="h6">Plant Description:</Typography>
+                <Typography variant="h6" sx={{color: '#4CAF50', mt: 2}}>Plant Description:</Typography>
                 <Typography variant="body1">
                   {results.suggestions[0].plant_details.wiki_description.value}
                 </Typography>
               </div>
               <div>
-                <Typography variant="h6">Image:</Typography>
-                <img src={results.images[0].url} alt="Plant" />
+                <Typography variant="h6" sx={{color: '#4CAF50', mt: 2}}>Image:</Typography>
+                <img  style ={{textAlign: 'center'}} src={results.images[0].url} alt="Plant" />
               </div>
               <div>
-                <Typography variant="h6">Similar Images:</Typography>
+                <Typography variant="h6" sx={{color: '#4CAF50', mt: 2}}>Similar Images:</Typography>
                 {results.suggestions[0].similar_images.map((img) => (
-                  <img key={img.id} src={img.url} alt="Similar Plant" />
+                  <img style ={{textAlign: 'center'}}  key={img.id} src={img.url} alt="Similar Plant" />
                 ))}
               </div>
-            </div>
-          )}
-  
-          {error && (
-            <div>
-              <Typography variant="h6">Error:</Typography>
-              <Typography variant="body1">{error}</Typography>
-            </div>
-          )}
-        </form>
-      </Box>
+            </CardContent>
+          </Card>
+        )}
+
+        {error && (
+          <div>
+            <Typography variant="h6">Error:</Typography>
+            <Typography variant="body1">{error}</Typography>
+          </div>
+        )}
+      </form>
     </Box>
+  </Box>
   );
 };
 
-export default PlantIdentification;
-
+export default PlantIdentification
 
